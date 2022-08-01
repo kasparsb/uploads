@@ -1,0 +1,101 @@
+.file-picker {
+  background-color: #dd2b30;
+  color: #fff;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.file-picker label,
+.file-picker .file-list,
+.file-picker .dragover,
+.file-picker .success {
+  font-family: SF Pro Display,Roboto,serif;
+  font-weight: 600;
+  font-size: 17px;
+}
+.file-picker label {
+  z-index: 1;
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row nowrap;
+  cursor: pointer;
+}
+.file-picker label input {
+  position: absolute;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+.file-picker .file-list {
+  display: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.file-picker .file-list li {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  min-height: 22px;
+  line-height: 22px;
+  padding: 2px 8px;
+}
+.file-picker .dragover {
+  z-index: 2;
+  display: none;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #dd2b30;
+}
+.file-picker .dragover:after {
+  display: block;
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 4px dashed #fff;
+}
+.file-picker .success {
+  z-index: 2;
+  display: none;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #dd2b30;
+}
+.file-picker--file-list label {
+  opacity: 0;
+}
+.file-picker--file-list .file-list {
+  display: block;
+}
+.file-picker--dragover .dragover {
+  display: flex;
+}
+.file-picker--success .success {
+  display: flex;
+}

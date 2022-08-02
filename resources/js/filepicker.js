@@ -10,6 +10,7 @@ import q from 'dom-helpers/src/q';
 let field;
 let uploadId;
 let uploadsHost;
+let maxSize = 20 * 1024 * 1024; // 20Mb
 
 function handleFiles(files) {
 
@@ -40,6 +41,13 @@ function uploadFiles(files) {
     let done = 0;
 
     for (let i = 0; i < files.length; i++) {
+
+        if (files[i].size > maxSize) {
+            // file too large
+            q(field, '.file-list li:nth-of-type('+(i+1)+') span').innerHTML = 'Par lielu ('+(Math.round(files[i].size / 1024 / 1024)+'Mb')+')';
+            continue;
+        }
+
 
         let data = new FormData();
         data.append('file', files[i]);

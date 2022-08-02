@@ -142,7 +142,7 @@ function js(cb){
 };
 
 function js2(cb){
-    bundleJs(getBrowserify(files.js2), true, true, 'filepicker');
+    bundleJs(getBrowserify(files.js2, 'webit'), true, true, 'filepicker');
 
     cb();
 };

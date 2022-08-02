@@ -9,7 +9,7 @@ import q from 'dom-helpers/src/q';
 
 let field;
 let uploadId;
-let uploadsHost = 'http://upload.darbs.xyz:8065';
+let uploadsHost;
 
 function handleFiles(files) {
 
@@ -84,11 +84,10 @@ function reset() {
     q(field, '.file-list').innerHTML = '';
 }
 
-export default function(el) {
+export default function(el, host) {
 
+    uploadsHost = host;
     field = el;
-
-    console.log(field);
 
     change(field, '[type=file]', (ev, el) => {
         handleFiles(el.files);

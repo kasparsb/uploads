@@ -753,6 +753,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 
 var field;
 var uploadId;
+var uploadsHost;
 
 function handleFiles(files) {
   createFileList(files);
@@ -780,7 +781,7 @@ function uploadFiles(files) {
     var data = new FormData();
     data.append('file', files[i]);
     data.append('upload', uploadId);
-    fetch('/upload', {
+    fetch(uploadsHost + '/upload', {
       headers: {
         'X-Requested-With': 'XMLHttpRequest'
       },
@@ -806,7 +807,7 @@ function uploadFiles(files) {
 }
 
 function createUpload(cb) {
-  (0, _post["default"])('/new').then(function (r) {
+  (0, _post["default"])(uploadsHost + '/new').then(function (r) {
     uploadId = r.hash;
     cb();
   });
@@ -818,7 +819,8 @@ function reset() {
   (0, _q["default"])(field, '.file-list').innerHTML = '';
 }
 
-function _default(el) {
+function _default(el, host) {
+  uploadsHost = host;
   field = el;
   (0, _change["default"])(field, '[type=file]', function (ev, el) {
     handleFiles(el.files);

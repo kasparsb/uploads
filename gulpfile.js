@@ -141,6 +141,12 @@ function js(cb){
     cb();
 };
 
+function js2(cb){
+    bundleJs(getBrowserify(files.js2), true, true, 'filepicker');
+
+    cb();
+};
+
 function watchjs(cb){
 
     var w = watchify(
@@ -199,4 +205,4 @@ function watchless(cb){
 };
 
 exports.default = gulp.series(watchjs, watchjs2, watchless);
-exports.dist = gulp.series(js, less2);
+exports.dist = gulp.series(js, js2, less2);

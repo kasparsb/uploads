@@ -10,14 +10,14 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::group(['middleware' => 'cors'], function(){
-    Route::get('/', function () {
-        return view('upload');
-    });
+Route::get('/', function () {
+    return view('upload');
 });
 
-Route::post('/new', [UploadsController::class, 'create']);
-Route::post('/upload', [UploadsController::class, 'upload']);
+Route::group(['middleware' => 'cors'], function(){
+    Route::post('/new', [UploadsController::class, 'create']);
+    Route::post('/upload', [UploadsController::class, 'upload']);
+});
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/admin', [AdminController::class, 'index']);

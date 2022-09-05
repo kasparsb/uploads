@@ -18,7 +18,7 @@ class Cors
     {
         return $next($request)
             ->header('Access-Control-Allow-Headers', 'x-requested-with')
-            ->header('Access-Control-Allow-Origin', 'https://www.la.lv')
+            ->header('Access-Control-Allow-Origin', 'https://www.la.lv/')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
     }
 }

@@ -16,4 +16,10 @@ class AdminController extends Controller
             'uploads' => Upload::with('files')->paginate(50),
         ]);
     }
+
+    public function downloadFile(Request $req, $id) {
+        $file = File::findOrFail($id);
+
+        return response()->file($file->path);
+    }
 }

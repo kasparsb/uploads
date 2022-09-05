@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Upload</title>
-    <link rel="stylesheet" href="{{ $app_css }}" type='text/css' media='all' />
+    <link rel="stylesheet" href="{{ $filepicker_css }}" type='text/css' media='all' />
     <style>
         html, body {
             margin: 0;
@@ -35,6 +35,8 @@
 
 
     <script src="{{ $filepicker_js }}"></script>
-    <script src="{{ $app_js }}"></script>
+    <script>
+        webit.default(document.querySelector('.file-picker'), 'http://upload.darbs.xyz:8065')
+    </script>
 </body>
 </html>

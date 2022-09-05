@@ -16,8 +16,13 @@ var pkg = require('./package.json');
 var files = {
     js: './resources/js/app.js',
     js2: './resources/js/filepicker.js',
-    less: './resources/less/app.less',
-    lesss: './resources/less/**/*.less',
+
+    less: './resources/less/app/app.less',
+    lesss: './resources/less/app/**/*.less',
+
+    less2: './resources/less/filepicker/app.less',
+    lesss2: './resources/less/filepicker**/*.less',
+
     dest: './storage/app/public/dist'
 }
 
@@ -112,7 +117,7 @@ function bundleJs(browserify, compress, firstRun, filename) {
     s.pipe(gulp.dest(files.dest));
 }
 
-function bundleLess(compress) {
+function bundleLess(entry, filename, compress) {
     if (typeof compress == 'undefined') {
         compress = true;
     }
@@ -121,7 +126,7 @@ function bundleLess(compress) {
         console.log('Minify css');
     }
 
-    gulp.src(files.less)
+    gulp.src(entry)
         .pipe(
             less({
                 compress: compress
@@ -131,7 +136,7 @@ function bundleLess(compress) {
                     console.log(er.filename+':'+er.line);
                 })
         )
-        .pipe(rename('app.min-'+pkg.version+'.css'))
+        .pipe(rename(filename+'.min-'+pkg.version+'.css'))
         .pipe(gulp.dest(files.dest));
 }
 
@@ -189,8 +194,14 @@ function watchjs2(cb){
     cb();
 };
 
-function less2(cb){
-    bundleLess();
+function doLess(cb){
+    bundleLess(files.less, 'app');
+
+    cb();
+}
+
+function doLess2(cb){
+    bundleLess(files.less2, 'filepicker');
 
     cb();
 }
@@ -198,11 +209,20 @@ function less2(cb){
 function watchless(cb){
     watch([files.lesss], function(){
         console.log('less files updated');
-        bundleLess(false);
+        bundleLess(files.less, 'app', false);
     });
 
     cb();
 };
 
-exports.default = gulp.series(watchjs, watchjs2, watchless);
-exports.dist = gulp.series(js, js2, less2);
+function watchless2(cb){
+    watch([files.lesss2], function(){
+        console.log('less2 files updated');
+        bundleLess(files.less2, 'filepicker', false);
+    });
+
+    cb();
+};
+
+exports.default = gulp.series(watchjs, watchjs2, watchless, watchless2);
+exports.dist = gulp.series(js, js2, doLess, doLess2);

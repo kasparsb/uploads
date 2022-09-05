@@ -10,8 +10,10 @@ Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/', function () {
-    return view('upload');
+Route::group(['middleware' => 'cors'], function(){
+    Route::get('/', function () {
+        return view('upload');
+    });
 });
 
 Route::post('/new', [UploadsController::class, 'create']);

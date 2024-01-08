@@ -11,12 +11,20 @@ Route::post('login', [LoginController::class, 'login']);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/', function () {
-    return view('upload');
+    return view('upload', [
+        'uploadUrl' => url('/'),
+    ]);
+});
+Route::get('/upload-with-fields', function () {
+    return view('upload-with-fields', [
+        'uploadUrl' => url('/'),
+    ]);
 });
 
 //Route::group(['middleware' => 'cors'], function(){
     Route::post('/new', [UploadsController::class, 'create']);
     Route::post('/upload', [UploadsController::class, 'upload']);
+    Route::post('/finish', [UploadsController::class, 'finish']);
 //});
 
 Route::group(['middleware' => 'auth'], function(){

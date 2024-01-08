@@ -4,39 +4,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Upload</title>
+    <link rel="stylesheet" href="{{ $app_css }}" type='text/css' media='all' />
     <link rel="stylesheet" href="{{ $filepicker_css }}" type='text/css' media='all' />
-    <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-        }
-    </style>
 </head>
 <body>
 
-    <div class="file-picker">
-        <label>
-            <input type="file" name="file" multiple />
+    <div class="app">
 
-            Pievieno failus
-        </label>
+        <div class="file-picker">
+            <label>
+                <input type="file" name="file" multiple />
+                Pievieno failus
+            </label>
 
-        <div class="dragover">
-            Nomet failus šeit
+            <div class="file-picker__dragover">
+                Nomet failus šeit
+            </div>
+
+            <ul class="file-picker__file-list"></ul>
+
+            <div class="file-picker__buttons">
+                <button>Nosūtīt failus</button>
+            </div>
+
+            <div class="file-picker__success">
+                Paldies, Jūsu faili ir iesūtīti!
+            </div>
         </div>
 
-        <div class="success">
-            Paldies, Jūsu faili ir iesūtīti
-        </div>
 
-        <ul class="file-list"></ul>
     </div>
-
 
     <script src="{{ $filepicker_js }}"></script>
     <script>
-        webit.default(document.querySelector('.file-picker'), 'http://upload.darbs.xyz:8065')
+        webit.default(document.querySelector('.file-picker'), {
+            uploadUrl: '{{ $uploadUrl }}'
+        })
     </script>
 </body>
 </html>

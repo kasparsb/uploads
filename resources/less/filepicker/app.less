@@ -1,12 +1,9 @@
 .file-picker {
 
-    background-color: #dd2b30;
-    color: #fff;
+    background-color: #d5d5d5;
+    color: #000;
 
     position: relative;
-
-    width: 100%;
-    height: 100%;
 
     label,
     .file-list,
@@ -45,11 +42,17 @@
         }
     }
 
-    .file-list {
+    &__file-list {
         display: none;
         list-style-type: none;
         margin: 0;
         padding: 0;
+
+        border: 2px solid #000;
+        border-radius: 4px;
+        margin: 12px;
+        padding: 12px 0;
+
 
         li {
             margin: 0;
@@ -62,11 +65,37 @@
             min-height: 22px;
             line-height: 22px;
 
-            padding: 2px 8px;
+            padding: 4px 12px;
         }
     }
 
-    .dragover {
+    &__buttons {
+        display: none;
+
+        margin-top: 20px;
+        flex-flow: row nowrap;
+        justify-content: center;
+
+        position: relative;
+        z-index: 10;
+
+        button {
+            background: none;
+            color: inherit;
+            border: none;
+            padding: 0;
+            font: inherit;
+            cursor: pointer;
+            outline: inherit;
+
+            background-color: #a3a3a3;
+            color: #000;
+            padding: 12px;
+            border-radius: 4px;
+        }
+    }
+
+    &__dragover {
         z-index: 2;
 
         display: none;
@@ -80,7 +109,7 @@
         width: 100%;
         height: 100%;
 
-        background-color: #dd2b30;
+        background-color: #d5d5d5;
 
         &:after {
             display: block;
@@ -90,11 +119,11 @@
             left: 8px;
             right: 8px;
             bottom: 8px;
-            border: 4px dashed #fff;
+            border: 2px dashed #000;
         }
     }
 
-    .success {
+    &__success {
         z-index: 2;
 
         display: none;
@@ -108,21 +137,25 @@
         width: 100%;
         height: 100%;
 
-        background-color: #dd2b30;
+        background-color: #d5d5d5;
+        color: #000;
     }
 
     &--file-list label {
         opacity: 0;
     }
-    &--file-list .file-list {
+    &--file-list &__file-list {
         display: block;
     }
-
-    &--dragover .dragover {
+    &--file-list &__buttons {
         display: flex;
     }
 
-    &--success .success {
+    &--dragover &__dragover {
+        display: flex;
+    }
+
+    &--success &__success {
         display: flex;
     }
 }

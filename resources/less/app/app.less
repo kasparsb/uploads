@@ -1,1 +1,27 @@
-@import (less) '../../../node_modules/bulma/css/bulma.css';
+//@import (less) '../../../node_modules/bulma/css/bulma.css';
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.app {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100%;
+}
+
+.app {
+    .success {
+        display: none;
+    }
+
+    &--success .success {
+        display: block;
+    }
+}
+
+.file-picker {
+    flex: 1 1 100%;
+}

@@ -16,13 +16,14 @@ class UploadsController extends Controller
     /**
      * Create new upload session
      */
-    public function create() {
+    public function create(Request $request) {
         return createUniqueModel(Upload::class, 'hash')->only('hash');
     }
 
     public function upload(Request $request) {
 
         $upload = Upload::where('hash', $request->upload)->first();
+
         if (!$upload) {
             abort(500);
         }
@@ -36,5 +37,21 @@ class UploadsController extends Controller
         ]);
 
         return $r->only('file_name');
+    }
+
+    /**
+     * Finish upload
+     */
+    public function finish(Request $request) {
+        $upload = Upload::where('hash', $request->upload)->first();
+
+        if (!$upload) {
+            abort(500);
+        }
+
+        $upload->meta = $request->meta;
+        $upload->finished_at = now();
+
+        $upload->save();
     }
 }

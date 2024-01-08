@@ -23,38 +23,47 @@ let maxSize = 20 * 1024 * 1024; // 20Mb
 
 function submit() {
 
-    let meta = {};
+    console.log('submit');
 
-    metaFields.forEach(field => {
-        meta[field.name] = field.getValue();
-    })
+    // Gadījumā, ja nav failu
+    createUpload(() => {
 
-    finishUpload(meta, () => {
+        console.log('createUpload done');
 
-        if (onSuccess) {
-            onSuccess();
-        }
-        else {
-            addClass(field, 'file-picker--success');
-        }
+        let meta = {};
 
-        filesToUpload = [];
-        createFileList(filesToUpload);
+        metaFields.forEach(field => {
+            meta[field.name] = field.getValue();
+        })
 
-        // Notīrām meta laukus
-        metaFields.forEach(field => field.clear())
-        // Notīrām selected file
-        q(field, '[type=file]').value = '';
+        finishUpload(meta, () => {
 
-        setTimeout(() => {
-            if (clearSuccess) {
-                clearSuccess();
+            if (onSuccess) {
+                onSuccess();
             }
             else {
-                removeClass(field, 'file-picker--success');
+                addClass(field, 'file-picker--success');
             }
-        }, 4000)
+
+            filesToUpload = [];
+            createFileList(filesToUpload);
+
+            // Notīrām meta laukus
+            metaFields.forEach(field => field.clear())
+            // Notīrām selected file
+            q(field, '[type=file]').value = '';
+
+            setTimeout(() => {
+                if (clearSuccess) {
+                    clearSuccess();
+                }
+                else {
+                    removeClass(field, 'file-picker--success');
+                }
+            }, 4000)
+        })
     })
+
 }
 
 function startUpload() {

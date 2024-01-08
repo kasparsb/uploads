@@ -13,7 +13,7 @@ class AdminController extends Controller
 
     public function index() {
         return view('admin', [
-            'uploads' => Upload::with('files')->paginate(50),
+            'uploads' => Upload::with('files')->orderBy('created_at', 'desc')->paginate(50),
         ]);
     }
 

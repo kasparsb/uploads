@@ -9,7 +9,11 @@ class Upload extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['hash'];
+    protected $fillable = ['hash', 'meta',];
+
+    public $casts = [
+        'meta' => 'object',
+    ];
 
     public function files() {
         return $this->hasMany(File::class)->orderBy('id', 'asc');

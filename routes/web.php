@@ -21,11 +21,11 @@ Route::get('/upload-with-fields', function () {
     ]);
 });
 
-Route::group(['middleware' => 'cors'], function(){
+//Route::group(['middleware' => 'cors'], function(){
     Route::post('/new', [UploadsController::class, 'create']);
     Route::post('/upload', [UploadsController::class, 'upload']);
     Route::post('/finish', [UploadsController::class, 'finish']);
-});
+//});
 
 Route::group(['middleware' => 'auth'], function(){
     Route::get('/admin', [AdminController::class, 'index']);

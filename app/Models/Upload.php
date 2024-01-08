@@ -15,6 +15,10 @@ class Upload extends Model
         'meta' => 'object',
     ];
 
+    public $dates = [
+        'finished_at',
+    ];
+
     public function files() {
         return $this->hasMany(File::class)->orderBy('id', 'asc');
     }

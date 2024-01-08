@@ -19,31 +19,29 @@
 
         <table class="table">
         @foreach($uploads as $upload)
-            @foreach($upload->files as $file)
-            <tr>
-                <td
-                    style="width:110px;"
-                    @class([
-                        'first' => $loop->index == 0,
-                    ])
-                    >
-                    @if ($loop->index == 0)
-                    {{ $upload->created_at->format('M j, Y H:i') }}
-                    @endif
-                </td>
-                <td
-                    @class([
-                        'first' => $loop->index == 0,
-                    ])
-                ><a href="{{ $file->url }}" target="_blank">{{ $file->file_name }}</a></td>
-                <td
-                    @class([
-                        'first' => $loop->index == 0,
-                        'has-text-right',
-                    ])
-                >{{ $file->size_human }}</td>
-            </tr>
-            @endforeach
+        <tr>
+            <td style="width:110px;">
+                {{ $upload->created_at->format('M j, Y H:i') }}
+                @if ($upload->finished_at)
+                <br />{{ $upload->finished_at->format('M j, Y H:i') }}
+                @endif
+            </td>
+            <td>
+                @if ($upload->meta)
+                    @foreach ($upload->meta as $key => $value)
+                    <b>{{ $key }}</b>
+                    <div>
+                        {{ $value }}
+                    </div>
+                    @endforeach
+                @endif
+            </td>
+            <td>
+                @foreach($upload->files as $file)
+                <a href="{{ $file->url }}" target="_blank">{{ $file->file_name }}</a> {{ $file->size_human }}
+                @endforeach
+            </td>
+        </tr>
         @endforeach
         </table>
 

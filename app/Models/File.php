@@ -14,6 +14,10 @@ class File extends Model
     protected $fillable = ['real_file_name', 'file_name', 'upload_id'];
 
     public function getSizeHumanAttribute() {
+        if (!Storage::disk('files')->exists($this->real_file_name)) {
+            return '';
+        }
+
         $size = Storage::disk('files')->size($this->real_file_name);
         if ($size < 1024) {
             return $size.'B';

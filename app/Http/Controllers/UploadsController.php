@@ -8,6 +8,8 @@ use Storage;
 use App\Models\File;
 use App\Models\Upload;
 
+use function App\Helpers\getIp;
+use function App\Helpers\getUserAgent;
 use function App\Helpers\createUniqueModel;
 
 class UploadsController extends Controller
@@ -17,7 +19,14 @@ class UploadsController extends Controller
      * Create new upload session
      */
     public function create(Request $request) {
-        return createUniqueModel(Upload::class, 'hash')->only('hash');
+        $upload = createUniqueModel(Upload::class, 'hash');
+
+        $upload->ip = getIp();
+        $upload->user_agent = getUserAgent();
+
+        $upload->save();
+
+        return $upload->only('hash');
     }
 
     public function upload(Request $request) {

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 use Auth;
@@ -25,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Paginator::defaultView('controls.pagination');
+        Paginator::defaultSimpleView('controls.simple-default');
+
         Auth::provider('text', function ($app, array $config) {
             // Return an instance of Illuminate\Contracts\Auth\UserProvider...
             return new \App\Auth\TextUserProvider();

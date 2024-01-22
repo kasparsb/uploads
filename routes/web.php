@@ -21,6 +21,10 @@ Route::get('/upload-with-fields', function () {
     ]);
 });
 
+
+/**
+ * Cors tiek kontrolēts config/cors
+ */
 //Route::group(['middleware' => 'cors'], function(){
     Route::post('/new', [UploadsController::class, 'create']);
     Route::post('/upload', [UploadsController::class, 'upload']);

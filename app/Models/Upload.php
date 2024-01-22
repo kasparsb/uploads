@@ -9,7 +9,7 @@ class Upload extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['hash', 'meta',];
+    protected $fillable = ['hash', 'meta', 'ip', 'user_agent', 'device',];
 
     public $casts = [
         'meta' => 'object',

@@ -7,6 +7,7 @@ use Storage;
 
 use App\Models\File;
 use App\Models\Upload;
+use App\Jobs\IpInfoRequest;
 
 use function App\Helpers\getIp;
 use function App\Helpers\getUserAgent;
@@ -25,6 +26,8 @@ class UploadsController extends Controller
         $upload->user_agent = getUserAgent();
 
         $upload->save();
+
+        IpInfoRequest::dispatch($upload);
 
         return $upload->only('hash');
     }

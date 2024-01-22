@@ -21,7 +21,11 @@
         @foreach($uploads as $upload)
         <tr>
             <td style="width:110px;">
-                {{ $upload->created_at->format('M j, Y H:i') }}
+                {{ $upload->created_at->format('M j, Y H:i') }}<br />
+                {{ $upload->ip }}<br />
+                @if ($upload->ip_info)
+                {{ json_encode($upload->ip_info) }}
+                @endif
                 @if ($upload->finished_at)
                 <br />{{ $upload->finished_at->format('M j, Y H:i') }}
                 @endif

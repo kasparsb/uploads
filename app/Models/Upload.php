@@ -13,6 +13,7 @@ class Upload extends Model
 
     public $casts = [
         'meta' => 'object',
+        'ip_info' => 'object',
     ];
 
     public $dates = [
